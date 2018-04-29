@@ -1,23 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TabsModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
-import {AuthService} from './shared/services/auth.service';
-import {HttpClientModule} from '@angular/common/http';
+import {CommonService} from './shared/services/common.service';
+import { ProfileComponent } from './profile/profile.component';
+import { GeneralInfoComponent } from './general-info/general-info.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProfileComponent,
+    GeneralInfoComponent
   ],
   imports: [
     HttpClientModule,
-    BsDropdownModule.forRoot(),
-    BrowserModule
+    TabsModule.forRoot(),
+    BrowserModule,
+    BrowserAnimationsModule
   ],
-  providers: [AuthService],
+  providers: [CommonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

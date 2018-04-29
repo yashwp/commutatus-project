@@ -1,22 +1,184 @@
-<div class="app-container">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-12">
-				<div class="btn-group" dropdown>
-				  <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-				    Button dropdown <span class="caret"></span>
-				  </button>
-				  <ul *dropdownMenu class="dropdown-menu" role="menu">
-				    <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
-				    <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
-				    <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
-				    <li class="divider dropdown-divider"></li>
-				    <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>
-				    </li>
-				  </ul>
-				</div>
+<div class="app-container h-100v">
+	<div class="container-fluid h-100">
+		<div *ngIf="opportunity" class="row h-100">
+      <div class="col-12 px-0">
+        <div class="app-hero-component d-flex align-items-center justify-content-center flex-column" [style.background-image]="'url(' + opportunity.cover_photo_urls + ')'">
+          <h2 class="text-white opportunity-title">{{title}}</h2>
+          <p class="text-white z-index-10 opportunity-location my-2">
+            <span class="fa fa-map-marker"></span> {{opportunity.location}}
+          </p>
+          <button class="btn btn-primary-grad border-0 text-white my-3" [class.cursor-disabled]="!isEnabled" [disabled]="!isEnabled">{{isEnabled ? 'Apply Now' : 'Expired'}}</button>
+        </div>
+      </div>
+			<div class="col-7 h-100 p-4">
+        <div class="app-tabs-component">
+          <tabset type="pills" [justified]="true">
+            <tab class="bg-white tab-item tab-overview" heading="Overview">
+              <div class="tab-item-box mt-4 p-5">
+                <div class="tab-item-content">
+                  <div class="mb-3">
+                    <h5 class="text-capitalize">Organization</h5>
+                    <hr class="hr-line">
+                  </div>
+                  <p class="text-muted my-4">{{opportunity.branch.organisation.name}}</p>
+                </div>
+                <div class="tab-item-content mt-3">
+                  <div class="mb-3">
+                    <h5 class="text-capitalize">Role description</h5>
+                    <hr class="hr-line">
+                  </div>
+                  <p class="text-muted my-4">{{opportunity.description}}</p>
+                </div>
+                <!--<div class="tab-item-content mt-3">-->
+                  <!--<div class="mb-3">-->
+                    <!--<h5 class="text-capitalize">Main activities</h5>-->
+                    <!--<hr class="hr-line">-->
+                  <!--</div>-->
+                  <!--<p class="text-muted my-4">{{opportunity.branch.organisation.name}}</p>-->
+                <!--</div>-->
+              </div>
+            </tab>
+            <tab class="bg-white tab-item tab-prerequisites" heading="Prerequisites">
+              <div class="tab-item-box my-4 p-5">
+                <div class="tab-item-content">
+                  <div class="mb-3">
+                    <h5 class="text-capitalize">Backgrounds</h5>
+                    <hr class="hr-line">
+                  </div>
+                  <div class="row">
+                    <div class="col-6 d-flex flex-column">
+                      <span class="text-sm text-muted text-uppercase">Preferred</span>
+                      <div class="d-flex">
+                        <ng-container *ngFor="let bg of backgrounds.preferred">
+                          <span>{{bg.name}},&nbsp;</span>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div class="col-6 d-flex flex-column">
+                      <span class="text-sm text-muted text-uppercase">Required</span>
+                      <div class="d-flex">
+                        <ng-container *ngFor="let bg of backgrounds.required">
+                          <span>{{bg.name}},&nbsp;</span>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-item-content mt-3">
+                  <div class="mb-3">
+                    <h5 class="text-capitalize">Skills</h5>
+                    <hr class="hr-line">
+                  </div>
+                  <div class="row">
+                    <div *ngIf="skills.preferred.length" class="col-6 d-flex flex-column">
+                      <span class="text-sm text-muted text-uppercase">Preferred</span>
+                      <div class="d-flex">
+                        <ng-container *ngFor="let skill of skills.preferred">
+                          <span>{{skill.name}},&nbsp;</span>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div *ngIf="skills.required.length" class="col-6 d-flex flex-column">
+                      <span class="text-sm text-muted text-uppercase">Required</span>
+                      <div class="d-flex">
+                        <ng-container *ngFor="let skill of skills.required">
+                          <span>{{skill.name}},&nbsp;</span>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-item-content mt-3">
+                  <div class="mb-3">
+                    <h5 class="text-capitalize">Languages</h5>
+                    <hr class="hr-line">
+                  </div>
+                  <div class="row">
+                    <div *ngIf="languages.preferred.length" class="col-6 d-flex flex-column">
+                      <span class="text-sm text-muted text-uppercase">Preferred</span>
+                      <div class="d-flex">
+                        <ng-container *ngFor="let lang of languages.preferred">
+                          <span>{{lang.name}},&nbsp;</span>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div *ngIf="languages.required.length" class="col-6 d-flex flex-column">
+                      <span class="text-sm text-muted text-uppercase">Required</span>
+                      <div class="d-flex">
+                        <ng-container *ngFor="let lang of languages.required">
+                          <span>{{lang.name}},&nbsp;</span>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-item-content mt-3">
+                  <div class="mb-3">
+                    <h5 class="text-capitalize">Nationalities</h5>
+                    <hr class="hr-line">
+                  </div>
+                  <div class="row">
+                    <div class="col-6 d-flex flex-column" *ngIf="nationalities.preferred.length">
+                      <span class="text-sm text-muted text-uppercase">Preferred</span>
+                      <div class="d-flex">
+                        <ng-container *ngFor="let nation of nationalities.preferred">
+                          <span>{{nation.name}},&nbsp;</span>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div class="col-6 d-flex flex-column" *ngIf="nationalities.required.length">
+                      <span class="text-sm text-muted text-uppercase">Required</span>
+                      <div class="d-flex">
+                        <ng-container *ngFor="let nation of nationalities.required">
+                          <span>{{nation.name}},&nbsp;</span>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="opportunity.study_levels.length" class="tab-item-content mt-3">
+                  <div class="mb-3">
+                    <h5 class="text-capitalize">Study Levels</h5>
+                    <hr class="hr-line">
+                  </div>
+                  <div class="row">
+                    <div class="col-6 d-flex flex-column">
+                      <span>{{opportunity.study_levels[0]?.name}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab class="bg-white tab-item tab-vnl" heading="Visa and Logistics">
+              <div class="tab-item-box my-4 p-5">
+                <div class="tab-item-content">
+                  <div class="row">
+                    <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+                      <span class="grad-text fa fa-cc-visa fa-5x"></span>
+                      <h5 class="my-3 text-muted">No Information Avaiable</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab class="bg-white tab-item tab-testimonial" heading="Testimonials">
+              <div class="tab-item-box my-4 p-5">
+                <div class="tab-item-content">
+                  <div class="row">
+                    <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+                      <span class="grad-text fa fa-quote-left fa-5x"></span>
+                      <h5 class="my-3 text-muted">No Testimonals Avaiable</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
 			</div>
+      <div class="col-5 h-100 py-4 pr-4">
+        <app-profile [opportunity]="opportunity"></app-profile>
+      </div>
 		</div>
 	</div>
 </div>
-<span class="fa fa-pencil"></span>

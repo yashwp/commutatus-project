@@ -1,0 +1,112 @@
+// Variables
+$primary-grad: linear-gradient(to right, #000046, #1cb5e0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+$secondary-grad: linear-gradient(90deg,#0c55fb,#1290fc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+$box-shadow: 0 24px 80px -12px rgba(0,0,0,.1);
+
+// Font Import
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,600');
+
+* {
+  font-family: 'Raleway', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
+.bg-grad-primary {
+  background: $primary-grad;
+}
+
+.h-100v {
+  min-height: 100vh;
+}
+
+.text-sm {
+  font-size: 11px;
+}
+
+.text-md {
+  font-size: 14px;
+}
+
+.cursor-disabled {
+  cursor: not-allowed;
+}
+
+.bg-grad-secondary {
+  background: $secondary-grad;
+}
+
+h5 {
+  color: #444;
+  font-size: 1.16rem;
+}
+
+.z-index-10 {
+  z-index: 10;
+}
+
+.btn-primary-grad {
+  @extend .bg-grad-secondary;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.16);
+  width: 200px;
+  padding: 10px 25px;
+  border-radius: 2px;
+  z-index: 10;
+}
+
+.grad-text {
+  background-image: $primary-grad;
+  color:transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+hr.hr-line {
+  width: 25px;
+  float: left;
+  margin: 0;
+  background: $primary-grad;
+  display: block;
+  height: 1px;
+}
+
+.app-container {
+  background-color: rgba(26, 41, 128, 0.03);
+  .app-hero-component {
+    .opportunity-title, .opportunity-location {
+      mix-blend-mode: color-dodge;
+    }
+    .opportunity-location {
+      font-size: 26px;
+    }
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    &:before {
+      content: '';
+      @extend .bg-grad-primary;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.3;
+    }
+  }
+
+  .app-tabs-component {
+    .tab-item {
+      .tab-item-box {
+        min-height: 200px;
+        box-shadow: $box-shadow;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+      }
+    }
+  }
+}

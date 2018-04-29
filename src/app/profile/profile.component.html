@@ -1,0 +1,68 @@
+<div class="app-profile-component pt-5">
+  <div class="bg-white profile-box mt-3 p-4">
+    <div class="profile-box-img text-center mb-3">
+      <img [ngStyle]="{'height': '70px'}" src="https://cdn-expa.aiesec.org/icons-v2/ge-logo.png" alt="head img" class="img-fluid">
+    </div>
+    <div class="profile-box-content">
+      <div class="mb-3">
+        <h5 class="text-capitalize">Background</h5>
+        <hr class="hr-line">
+      </div>
+      <ng-container *ngFor="let bg of opportunity?.backgrounds">
+        <span>{{bg.name}},&nbsp;</span>
+      </ng-container>
+    </div>
+    <div class="profile-box-content mt-3">
+      <div class="mb-3">
+        <h5 class="text-capitalize">Session</h5>
+        <hr class="hr-line">
+      </div>
+      <div class="row">
+        <div class="col-4">
+            <span class="text-sm text-muted text-uppercase">Earliest start date</span>
+            <p class="mb-0">{{getFormatedDate(opportunity?.earliest_start_date)}}</p>
+        </div>
+        <div class="col-4">
+            <span class="text-sm text-muted text-uppercase">Latest end date</span>
+            <p class="mb-0">{{getFormatedDate(opportunity?.latest_end_date)}}</p>
+        </div>
+        <div class="col-4">
+            <span class="text-sm text-muted text-uppercase">Duration</span>
+            <p class="mb-0">{{opportunity?.duration}} Weeks</p>
+        </div>
+      </div>
+    </div>
+    <div class="profile-box-content mt-3">
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <h5 class="text-capitalize">Salary ({{opportunity?.specifics_info?.salary_currency ? opportunity?.specifics_info?.salary_currency : '₹'}})</h5>
+            <hr class="hr-line">
+          </div>
+          <div class="mb-3">
+            <p>{{opportunity?.specifics_info?.salary}}</p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <h5 class="text-capitalize">Positions</h5>
+            <hr class="hr-line">
+          </div>
+          <div class="mb-3">
+            <p>{{opportunity?.available_openings}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="profile-box-content">
+      <div class="mb-3">
+        <h5 class="text-capitalize">Fees</h5>
+        <hr class="hr-line">
+      </div>
+      <p>Please login to view fee</p>
+    </div>
+    <div class="profile-box-content text-center">
+      <button class="btn btn-primary-grad border-0 text-white my-3" [class.cursor-disabled]="!isEnabled" [disabled]="!isEnabled"> {{isEnabled ? 'Apply Now' : 'Expired'}}</button>
+    </div>
+  </div>
+</div>
