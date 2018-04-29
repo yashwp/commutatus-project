@@ -8,6 +8,7 @@ import {CommonService} from './shared/services/common.service';
 })
 
 export class AppComponent implements OnInit {
+
   title = 'Commutatus Project';
   opportunity: any;
   backgrounds: any = {
@@ -27,11 +28,12 @@ export class AppComponent implements OnInit {
     required: []
   };
   isEnabled = false;
+  showModal = true;
   constructor(private _commonService: CommonService) {
   }
 
   ngOnInit() {
-    this._commonService.getOportutnity().subscribe((res: any) => {
+    this._commonService.getOportutnityById(526).subscribe((res: any) => {
       if (res) {
         this.opportunity = res;
         this.title = res.title;
@@ -50,4 +52,5 @@ export class AppComponent implements OnInit {
     this.nationalities.preferred = this.opportunity.nationalities.filter((i) => i.option === 'preferred');
     this.nationalities.required = this.opportunity.nationalities.filter((i) => i.option === 'required');
   }
+
 }

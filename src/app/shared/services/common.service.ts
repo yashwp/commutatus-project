@@ -9,7 +9,15 @@ export class CommonService {
 
   constructor(private http: HttpClient) { }
 
-  getOportutnity() {
-    return this.http.get(this.apiPath + `/opportunities/526?${this.accessToken}`);
+  getOportutnityById(id: number) {
+    return this.http.get(this.apiPath + `/opportunities/${id}?${this.accessToken}`);
+  }
+
+  getSkills() {
+    return this.http.get(this.apiPath + `/lists/skills/?${this.accessToken}`);
+  }
+
+  getBackgrounds() {
+    return this.http.get(this.apiPath + `/lists/backgrounds/?${this.accessToken}`);
   }
 }

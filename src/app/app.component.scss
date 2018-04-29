@@ -5,6 +5,7 @@ $box-shadow: 0 24px 80px -12px rgba(0,0,0,.1);
 
 // Font Import
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,600');
+@import url('https://cdn.linearicons.com/free/1.0.0/icon-font.min.css');
 
 * {
   font-family: 'Raleway', sans-serif;
@@ -24,6 +25,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .text-sm {
   font-size: 11px;
+}
+
+.fo-55 {
+  font-size: 55px;
 }
 
 .text-md {
@@ -107,6 +112,33 @@ hr.hr-line {
         -moz-border-radius: 4px;
         border-radius: 4px;
       }
+    }
+  }
+
+  // Fab button scss
+  .fab {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 70px;
+    height: 70px;
+    color: white;
+    font-size: 22px;
+    background: $secondary-grad;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.25);
+    transition: all 0.2s cubic-bezier(.8,1,.56,0);
+    &:hover {
+      box-shadow: 0 6px 14px 0 rgba(0,0,0,0.15);
+      transform: scale(1.05);
+    }
+    &:visited {
+      outline: none;
     }
   }
 }

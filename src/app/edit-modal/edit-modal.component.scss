@@ -1,0 +1,31 @@
+@import "../app.component";
+
+input.ng-invalid + .error-msg,
+ng-select.ng-invalid + .error-msg {
+  display: block;
+}
+
+.error-msg {
+  position: absolute;
+  margin: 0;
+  right: 12px;
+  font-size: 0.718rem;
+  color: #e53935;
+  cursor: pointer;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  padding: 0 4px;
+  border-top: none;
+  -webkit-border-radius: 0 0 2px 2px;
+  border-radius: 0 0 2px 2px;
+  -webkit-transition: 0.2s ease-in;
+  -o-transition: 0.2s ease-in;
+  transition: 0.2s ease-in;
+  font-weight: 300;
+  bottom: -25px;
+  height: 25px;
+  display: none;
+}

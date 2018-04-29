@@ -5,7 +5,7 @@
         <div class="app-hero-component d-flex align-items-center justify-content-center flex-column" [style.background-image]="'url(' + opportunity.cover_photo_urls + ')'">
           <h2 class="text-white opportunity-title">{{title}}</h2>
           <p class="text-white z-index-10 opportunity-location my-2">
-            <span class="fa fa-map-marker"></span> {{opportunity.location}}
+            <span class="lnr lnr-map-marker"></span> {{opportunity.location}}
           </p>
           <button class="btn btn-primary-grad border-0 text-white my-3" [class.cursor-disabled]="!isEnabled" [disabled]="!isEnabled">{{isEnabled ? 'Apply Now' : 'Expired'}}</button>
         </div>
@@ -154,7 +154,7 @@
                 <div class="tab-item-content">
                   <div class="row">
                     <div class="col-12 d-flex flex-column justify-content-center align-items-center">
-                      <span class="grad-text fa fa-cc-visa fa-5x"></span>
+                      <span class="grad-text lnr lnr-star-half fo-55"></span>
                       <h5 class="my-3 text-muted">No Information Avaiable</h5>
                     </div>
                   </div>
@@ -166,7 +166,7 @@
                 <div class="tab-item-content">
                   <div class="row">
                     <div class="col-12 d-flex flex-column justify-content-center align-items-center">
-                      <span class="grad-text fa fa-quote-left fa-5x"></span>
+                      <span class="grad-text lnr lnr-bubble fo-55"></span>
                       <h5 class="my-3 text-muted">No Testimonals Avaiable</h5>
                     </div>
                   </div>
@@ -181,4 +181,8 @@
       </div>
 		</div>
 	</div>
+  <button (click)="showModal = true" class="fab border-0">
+    <span class="lnr lnr-pencil"></span>
+  </button>
+  <app-edit-modal [data]="opportunity" [isModalShown]="showModal" (onClose)="showModal = false"></app-edit-modal>
 </div>

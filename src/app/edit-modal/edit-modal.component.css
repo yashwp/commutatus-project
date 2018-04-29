@@ -106,10 +106,32 @@ hr.hr-line {
     .app-container .fab:visited {
       outline: none; }
 
-.app-profile-component .profile-box {
-  box-shadow: 0 24px 80px -12px rgba(0, 0, 0, 0.1);
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px; }
+input.ng-invalid + .error-msg,
+ng-select.ng-invalid + .error-msg {
+  display: block; }
 
-/*# sourceMappingURL=profile.component.css.map */
+.error-msg {
+  position: absolute;
+  margin: 0;
+  right: 12px;
+  font-size: 0.718rem;
+  color: #e53935;
+  cursor: pointer;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  padding: 0 4px;
+  border-top: none;
+  -webkit-border-radius: 0 0 2px 2px;
+  border-radius: 0 0 2px 2px;
+  -webkit-transition: 0.2s ease-in;
+  -o-transition: 0.2s ease-in;
+  transition: 0.2s ease-in;
+  font-weight: 300;
+  bottom: -25px;
+  height: 25px;
+  display: none; }
+
+/*# sourceMappingURL=edit-modal.component.css.map */
