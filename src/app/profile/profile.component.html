@@ -1,4 +1,4 @@
-<div class="app-profile-component pt-5">
+<div class="app-profile-component pt-sm-5">
   <div class="bg-white profile-box mt-3 p-4">
     <div class="profile-box-img text-center mb-3">
       <img [ngStyle]="{'height': '70px'}" src="https://cdn-expa.aiesec.org/icons-v2/ge-logo.png" alt="head img" class="img-fluid">
@@ -36,11 +36,11 @@
       <div class="row">
         <div class="col-6">
           <div class="mb-3">
-            <h5 class="text-capitalize mb-1">Salary ({{opportunity?.specifics_info?.salary_currency ? opportunity?.specifics_info?.salary_currency : '₹'}})</h5>
+            <h5 class="text-capitalize mb-1">Salary ({{opportunity?.specifics_info?.salary_currency?.symbol ? opportunity?.specifics_info?.salary_currency?.symbol : '₹'}})</h5>
             <hr class="hr-line">
           </div>
           <div class="mb-3">
-            <p>{{opportunity?.specifics_info?.salary}}</p>
+            <p>{{opportunity?.specifics_info?.salary}} <small>per month</small></p>
           </div>
         </div>
         <div class="col-6">

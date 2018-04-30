@@ -1,9 +1,12 @@
-import {Component, OnInit, Input, Output, ViewChild, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, OnInit, Input, Output, ViewChild, EventEmitter, OnChanges, SimpleChanges, OnDestroy} from '@angular/core';
 import {ModalDirective} from 'ngx-bootstrap';
 import {CommonService} from '../shared/services/common.service';
 import * as moment from 'moment';
 import {fadeDown} from '../shared/animations/fade';
-import {NgForm} from "@angular/forms";
+import {NgForm} from '@angular/forms';
+import {GooglePlaceDirective} from 'ngx-google-places-autocomplete';
+import {Address} from 'ngx-google-places-autocomplete/objects/address';
+import {ISubscription} from "rxjs/Subscription";
 
 
 @Component({
@@ -12,9 +15,10 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./edit-modal.component.scss'],
   animations: [fadeDown]
 })
-export class EditModalComponent implements OnInit, OnChanges {
+export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
 
   @ViewChild('autoShownModal') autoShownModal: ModalDirective;
+  @ViewChild('placesRef') placesRef: GooglePlaceDirective;
   @Input()
   data: any;
   @Input()
@@ -22,6 +26,9 @@ export class EditModalComponent implements OnInit, OnChanges {
   @Output()
   onClose: EventEmitter<any> = new EventEmitter<any>();
 
+  options = {
+    componentRestrictions: { country: 'IN' }
+  };
   today =  moment().format('L');
   fromDate = moment().format('DD/MM/YY');
   toDate = moment().format('DD/MM/YY');
@@ -30,18 +37,19 @@ export class EditModalComponent implements OnInit, OnChanges {
   minDate: any;
   maxDate: any;
   updateObj: any = {};
+  private subscriptions: { [name: string]: ISubscription } = {};
 
   constructor(private _commonService: CommonService) { }
 
   ngOnInit() {
-    this._commonService.getBackgrounds().subscribe((bg: any) => {
+    this.subscriptions.bg = this._commonService.getBackgrounds().subscribe((bg: any) => {
       if (bg) {
-        this.allBackgrounds = bg;
+        this.allBackgrounds = [...bg];
       }
     });
-    this._commonService.getSkills().subscribe((skills: any) => {
+    this.subscriptions.skill = this._commonService.getSkills().subscribe((skills: any) => {
       if (skills) {
-        this.allSkills = skills;
+        this.allSkills = [...skills];
       }
     });
     this.initialize();
@@ -57,8 +65,8 @@ export class EditModalComponent implements OnInit, OnChanges {
       this.updateObj.earliest_start_date = moment(this.data.earliest_start_date).format('DD/MM/YY');
       this.updateObj.latest_end_date = moment(this.data.latest_end_date).format('DD/MM/YY');
       this.updateObj.applications_close_date = moment(this.data.applications_close_date).format('DD/MM/YY');
-      this.updateObj.backgrounds = [...this.data.backgrounds];
-      this.updateObj.skills = [...this.data.skills];
+      this.updateObj.backgrounds = this.data.backgrounds;
+      this.updateObj.skills = this.data.skills;
       this.updateObj.role_info.city = this.data.role_info.city;
       this.updateObj.role_info.selection_process = this.data.role_info.selection_process;
       this.updateObj.specifics_info.salary = this.data.specifics_info.salary;
@@ -69,6 +77,18 @@ export class EditModalComponent implements OnInit, OnChanges {
     if (changes.data || changes.isModalShown) {
       this.initialize();
     }
+  }
+
+  onCityChange(address: Address) {
+    this.updateObj.role_info.city = address.formatted_address;
+  }
+
+  addOptionProperty(arr: any[]) {
+    return arr.map((i: any) => {
+      if (!i.hasOwnProperty('option')) {
+        return Object.assign({option: 'preferred'}, i);
+      }
+    });
   }
 
   getUpdateObj() {
@@ -103,10 +123,21 @@ export class EditModalComponent implements OnInit, OnChanges {
   }
 
   update(isValid: boolean, form: NgForm) {
+    for (const key of Object.keys(this.updateObj)) {
+      if (key === 'backgrounds' || key === 'skills') {
+        this.updateObj[key] = this.addOptionProperty(this.updateObj[key]);
+      }
+    }
+    console.log(' plese chal ja', this.updateObj);
     if (isValid) {
-      console.log(this.updateObj);
+      this.subscriptions.update = this._commonService.updateOpportunity(this.data.id, this.updateObj).subscribe((res: any) => {
+        if (res) {
+          console.log('after response');
+        }
+      });
     }
   }
+
   hideModal(): void {
     this.autoShownModal.hide();
   }
@@ -116,4 +147,13 @@ export class EditModalComponent implements OnInit, OnChanges {
     this.onClose.emit(true);
   }
 
+  ngOnDestroy() {
+    if (this.subscriptions) {
+      for (const [key, value] of Object.entries(this.subscriptions)) {
+        if (value) {
+          (value as ISubscription).unsubscribe();
+        }
+      }
+    }
+  }
 }

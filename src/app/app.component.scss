@@ -86,6 +86,9 @@ hr.hr-line {
     .opportunity-location {
       font-size: 26px;
     }
+    .pac-container {
+      z-index: 9999 !important;
+    }
     height: 400px;
     background-repeat: no-repeat;
     background-size: cover;
@@ -120,8 +123,8 @@ hr.hr-line {
     position: fixed;
     right: 25px;
     bottom: 25px;
-    width: 70px;
-    height: 70px;
+    width: 65px;
+    height: 65px;
     color: white;
     font-size: 22px;
     background: $secondary-grad;

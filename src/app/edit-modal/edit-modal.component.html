@@ -47,32 +47,35 @@
             </div>
             <div class="col-12 mb-3">
               <label class="text-muted text-uppercase text-sm mb-0" for="bg">Backgrounds</label><span class="text-danger">*</span>
-              <ng-select name="backgrounds" id="bg" [items]="allBackgrounds" bindLabel="name" bindValue="id" [multiple]="true" [maxSelectedItems]="3" appendTo="body"
-                         [(ngModel)]="updateObj.backgrounds.id"></ng-select>
+              <ng-select name="backgrounds" id="bg" [items]="allBackgrounds" bindLabel="name" closeOnSelect="false" hideSelected="true" [multiple]="true" [maxSelectedItems]="3" appendTo="body"
+                         [(ngModel)]="updateObj.backgrounds">
+              </ng-select>
             </div>
             <div class="col-12 mb-3">
               <label class="text-muted text-uppercase text-sm mb-0" for="skills">Skills</label><span class="text-danger">*</span>
-              <ng-select name="skills" id="skills" [items]="allSkills" bindLabel="name" bindValue="id" [multiple]="true" appendTo="body"
-                         [(ngModel)]="data.skills.id"></ng-select>
+              <ng-select name="skills" id="skills" [items]="allSkills" bindLabel="name" closeOnSelect="false" hideSelected="true" [multiple]="true" appendTo="body"
+                         [(ngModel)]="data.skills"></ng-select>
             </div>
             <div class="col-12 mb-3">
               <div class="row">
                 <div class="col-6">
                   <label class="text-muted text-uppercase text-sm mb-0" for="selection">Selection Process</label><span class="text-danger">*</span>
-                  <input required appLimitTo [limit]="100" type="text" class="form-control" name="selection"
+                  <input required appLimitTo [limit]="100" type="text" class="form-control" name="selection" #process="ngModel"
                          [(ngModel)]="updateObj.role_info.selection_process" id="selection">
+                  <span class="error-msg" @fadeDown *ngIf="!process?.valid && (process.touched|| f.submitted)">Please enter selection process</span>
                 </div>
                 <div class="col-6">
                   <label class="text-muted text-uppercase text-sm mb-0" for="salary">Salary</label><span class="text-danger">*</span>
-                  <input required appLimitTo [limit]="8" type="number" class="form-control" name="salary"
+                  <input required appLimitTo [limit]="8" type="number" class="form-control" name="salary" #sal="ngModel"
                          [(ngModel)]="updateObj.specifics_info.salary" id="salary">
+                  <span class="error-msg" @fadeDown *ngIf="!sal?.valid && (sal.touched|| f.submitted)">Please enter salary</span>
                 </div>
               </div>
             </div>
             <div class="col-12 mb-3">
               <label class="text-muted text-uppercase text-sm mb-0" for="city">City</label><span class="text-danger">*</span>
-              <ng-select name="city" id="city" [items]="allSkills" bindLabel="name" bindValue="name" appendTo="body"
-                         [(ngModel)]="updateObj.role_info.city"></ng-select>
+              <input ngx-google-places-autocomplete #placesRef="ngx-places" [options]="options" (onAddressChange)="onCityChange($event)" required name="city" id="city" class="form-control" [(ngModel)]="updateObj.role_info.city">
+              <span class="error-msg" @fadeDown *ngIf="!placesRef?.valid && (placesRef?.errors|| f.submitted)">Please select city</span>
             </div>
             <div class="col-12 text-center">
               <button class="btn btn-primary-grad mt-3 text-white border-0">Update</button>

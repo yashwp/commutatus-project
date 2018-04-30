@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {CommonService} from './shared/services/common.service';
+import {ISubscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,7 @@ import {CommonService} from './shared/services/common.service';
   styleUrls: ['./app.component.scss'],
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
   title = 'Commutatus Project';
   opportunity: any;
@@ -29,11 +30,13 @@ export class AppComponent implements OnInit {
   };
   isEnabled = false;
   showModal = true;
+  private subscriptions: { [name: string]: ISubscription } = {};
+
   constructor(private _commonService: CommonService) {
   }
 
   ngOnInit() {
-    this._commonService.getOportutnityById(526).subscribe((res: any) => {
+    this.subscriptions.opportunity = this._commonService.getOportutnityById(526).subscribe((res: any) => {
       if (res) {
         this.opportunity = res;
         this.title = res.title;
@@ -50,6 +53,16 @@ export class AppComponent implements OnInit {
     for (const key of propertyKeys) {
       this[key].preferred = this.opportunity[key].filter(isPreferred);
       this[key].required = this.opportunity[key].filter(isRequired);
+    }
+
+    ngOnDestroy() {
+      if (this.subscriptions) {
+        for (const [key, value] of Object.entries(this.subscriptions)) {
+          if (value) {
+            (value as ISubscription).unsubscribe();
+          }
+        }
+      }
     }
   }
 

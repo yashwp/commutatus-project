@@ -20,4 +20,8 @@ export class CommonService {
   getBackgrounds() {
     return this.http.get(this.apiPath + `/lists/backgrounds/?${this.accessToken}`);
   }
+
+  updateOpportunity(id: number, obj: any) {
+    return this.http.patch(this.apiPath + `/opportunities/${id}?${this.accessToken}`, {opportunity: obj});
+  }
 }

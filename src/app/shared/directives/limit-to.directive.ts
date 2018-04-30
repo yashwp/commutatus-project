@@ -22,7 +22,6 @@ export class LimitToDirective implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // this._ref.detach();
     if (this.subscriptions) {
       for (const [key, value] of Object.entries(this.subscriptions)) {
         if (value) {

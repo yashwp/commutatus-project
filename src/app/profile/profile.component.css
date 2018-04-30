@@ -67,6 +67,8 @@ hr.hr-line {
       mix-blend-mode: color-dodge; }
     .app-container .app-hero-component .opportunity-location {
       font-size: 26px; }
+    .app-container .app-hero-component .pac-container {
+      z-index: 9999 !important; }
     .app-container .app-hero-component:before {
       content: '';
       position: absolute;
@@ -87,8 +89,8 @@ hr.hr-line {
     position: fixed;
     right: 25px;
     bottom: 25px;
-    width: 70px;
-    height: 70px;
+    width: 65px;
+    height: 65px;
     color: white;
     font-size: 22px;
     background: linear-gradient(90deg, #0c55fb, #1290fc);

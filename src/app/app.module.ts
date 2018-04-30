@@ -16,6 +16,7 @@ import {GeneralInfoComponent} from './general-info/general-info.component';
 import {DirectivesModule} from './shared/directives/directives.module';
 import {EditModalComponent} from './edit-modal/edit-modal.component';
 import {PipeModule} from './shared/pipe/pipe.module';
+import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {PipeModule} from './shared/pipe/pipe.module';
     DirectivesModule,
     PipeModule,
     HttpClientModule,
+    GooglePlaceModule,
     BsDatepickerModule.forRoot(),
     TabsModule.forRoot(),
     ModalModule.forRoot(),
