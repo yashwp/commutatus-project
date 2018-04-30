@@ -43,14 +43,14 @@ export class AppComponent implements OnInit {
   }
 
   filterByProperty() {
-    this.skills.preferred = this.opportunity.skills.filter((i) => i.option === 'preferred');
-    this.skills.required = this.opportunity.skills.filter((i) => i.option === 'required');
-    this.backgrounds.preferred = this.opportunity.backgrounds.filter((i) => i.option === 'preferred');
-    this.backgrounds.required = this.opportunity.backgrounds.filter((i) => i.option === 'required');
-    this.languages.preferred = this.opportunity.languages.filter((i) => i.option === 'preferred');
-    this.languages.required = this.opportunity.languages.filter((i) => i.option === 'required');
-    this.nationalities.preferred = this.opportunity.nationalities.filter((i) => i.option === 'preferred');
-    this.nationalities.required = this.opportunity.nationalities.filter((i) => i.option === 'required');
+    const isPreferred = ({ option }: any) => option === 'preferred';
+    const isRequired = ({ option }: any) => option === 'required';
+    const propertyKeys: Array<any> = ['skills', 'backgrounds', 'languages', 'nationalities'];
+
+    for (const key of propertyKeys) {
+      this[key].preferred = this.opportunity[key].filter(isPreferred);
+      this[key].required = this.opportunity[key].filter(isRequired);
+    }
   }
 
 }

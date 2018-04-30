@@ -48,7 +48,7 @@
             <div class="col-12 mb-3">
               <label class="text-muted text-uppercase text-sm mb-0" for="bg">Backgrounds</label><span class="text-danger">*</span>
               <ng-select name="backgrounds" id="bg" [items]="allBackgrounds" bindLabel="name" bindValue="id" [multiple]="true" [maxSelectedItems]="3" appendTo="body"
-                         [(ngModel)]="data.backgrounds.id"></ng-select>
+                         [(ngModel)]="updateObj.backgrounds.id"></ng-select>
             </div>
             <div class="col-12 mb-3">
               <label class="text-muted text-uppercase text-sm mb-0" for="skills">Skills</label><span class="text-danger">*</span>

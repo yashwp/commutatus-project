@@ -17,21 +17,21 @@
               <div class="tab-item-box mt-4 p-5">
                 <div class="tab-item-content">
                   <div class="mb-3">
-                    <h5 class="text-capitalize">Organization</h5>
+                    <h5 class="text-capitalize mb-1">Organization</h5>
                     <hr class="hr-line">
                   </div>
                   <p class="text-muted my-4">{{opportunity.branch.organisation.name}}</p>
                 </div>
                 <div class="tab-item-content mt-3">
                   <div class="mb-3">
-                    <h5 class="text-capitalize">Role description</h5>
+                    <h5 class="text-capitalize mb-1">Role description</h5>
                     <hr class="hr-line">
                   </div>
                   <p class="text-muted my-4">{{opportunity.description}}</p>
                 </div>
                 <!--<div class="tab-item-content mt-3">-->
                   <!--<div class="mb-3">-->
-                    <!--<h5 class="text-capitalize">Main activities</h5>-->
+                    <!--<h5 class="text-capitalize mb-1">Main activities</h5>-->
                     <!--<hr class="hr-line">-->
                   <!--</div>-->
                   <!--<p class="text-muted my-4">{{opportunity.branch.organisation.name}}</p>-->
@@ -42,7 +42,7 @@
               <div class="tab-item-box my-4 p-5">
                 <div class="tab-item-content">
                   <div class="mb-3">
-                    <h5 class="text-capitalize">Backgrounds</h5>
+                    <h5 class="text-capitalize mb-1">Backgrounds</h5>
                     <hr class="hr-line">
                   </div>
                   <div class="row">
@@ -50,7 +50,7 @@
                       <span class="text-sm text-muted text-uppercase">Preferred</span>
                       <div class="d-flex">
                         <ng-container *ngFor="let bg of backgrounds.preferred">
-                          <span>{{bg.name}},&nbsp;</span>
+                          <span>{{bg.name ? (bg.name + ', ') : '' | trim}}</span>
                         </ng-container>
                       </div>
                     </div>
@@ -58,7 +58,7 @@
                       <span class="text-sm text-muted text-uppercase">Required</span>
                       <div class="d-flex">
                         <ng-container *ngFor="let bg of backgrounds.required">
-                          <span>{{bg.name}},&nbsp;</span>
+                          <span>{{bg.name ? (bg.name + ', ') : '' | trim}}</span>
                         </ng-container>
                       </div>
                     </div>
@@ -66,7 +66,7 @@
                 </div>
                 <div class="tab-item-content mt-3">
                   <div class="mb-3">
-                    <h5 class="text-capitalize">Skills</h5>
+                    <h5 class="text-capitalize mb-1">Skills</h5>
                     <hr class="hr-line">
                   </div>
                   <div class="row">
@@ -90,7 +90,7 @@
                 </div>
                 <div class="tab-item-content mt-3">
                   <div class="mb-3">
-                    <h5 class="text-capitalize">Languages</h5>
+                    <h5 class="text-capitalize mb-1">Languages</h5>
                     <hr class="hr-line">
                   </div>
                   <div class="row">
@@ -114,7 +114,7 @@
                 </div>
                 <div class="tab-item-content mt-3">
                   <div class="mb-3">
-                    <h5 class="text-capitalize">Nationalities</h5>
+                    <h5 class="text-capitalize mb-1">Nationalities</h5>
                     <hr class="hr-line">
                   </div>
                   <div class="row">
@@ -138,7 +138,7 @@
                 </div>
                 <div *ngIf="opportunity.study_levels.length" class="tab-item-content mt-3">
                   <div class="mb-3">
-                    <h5 class="text-capitalize">Study Levels</h5>
+                    <h5 class="text-capitalize mb-1">Study Levels</h5>
                     <hr class="hr-line">
                   </div>
                   <div class="row">

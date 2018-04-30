@@ -49,35 +49,19 @@ export class EditModalComponent implements OnInit, OnChanges {
 
   initialize() {
     this.updateObj = this.getUpdateObj();
-    // this.minDate = moment(this.today).add(30, 'day');
-    // this.maxDate = moment(this.today).add(90, 'day');
+    this.minDate = moment(this.today).add(30, 'day');
+    this.maxDate = moment(this.today).add(90, 'day');
     if (this.data) {
-      this.updateObj = {
-        title: this.data.title,
-        description: this.data.description,
-        earliest_start_date: moment(this.data.earliest_start_date).format('DD/MM/YY'),
-        latest_end_date: moment(this.data.latest_end_date).format('DD/MM/YY'),
-        applications_close_date: moment(this.data.applications_close_date).format('DD/MM/YY'),
-        role_info: {
-          city: this.data.role_info.city,
-          required_preparation: null,
-          learning_points: null,
-          learning_points_list: [],
-          additional_instructions: null,
-          selection_process: this.data.role_info.selection_process
-        },
-        specifics_info: {
-          salary: this.data.specifics_info.salary,
-          salary_currency: null,
-          ask_gip_question: null,
-          salary_periodicity: null,
-          ef_test_required: null,
-          computer: false,
-          saturday_work: false,
-          expected_work_schedule: null,
-          saturday_work_schedule: null
-        }
-      };
+      this.updateObj.title = this.data.title;
+      this.updateObj.description = this.data.description;
+      this.updateObj.earliest_start_date = moment(this.data.earliest_start_date).format('DD/MM/YY');
+      this.updateObj.latest_end_date = moment(this.data.latest_end_date).format('DD/MM/YY');
+      this.updateObj.applications_close_date = moment(this.data.applications_close_date).format('DD/MM/YY');
+      this.updateObj.backgrounds = [...this.data.backgrounds];
+      this.updateObj.skills = [...this.data.skills];
+      this.updateObj.role_info.city = this.data.role_info.city;
+      this.updateObj.role_info.selection_process = this.data.role_info.selection_process;
+      this.updateObj.specifics_info.salary = this.data.specifics_info.salary;
     }
   }
 
