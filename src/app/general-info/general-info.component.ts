@@ -1,10 +1,8 @@
 import {Component, OnInit, Input, SimpleChanges, OnChanges} from '@angular/core';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-general-info',
   templateUrl: './general-info.component.html',
-  styleUrls: ['./general-info.component.scss']
 })
 export class GeneralInfoComponent implements OnInit, OnChanges {
 

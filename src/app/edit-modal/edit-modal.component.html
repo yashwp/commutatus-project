@@ -31,13 +31,13 @@
                 <div class="col-6">
                   <label class="text-muted mb-0 text-uppercase text-sm" for="sDate">Start date</label><span class="text-danger">*</span>
                   <input required bsDatepicker #sDate="bsDatepicker" type="text" class="form-control" name="sDate"  #sd="ngModel" [(ngModel)]="updateObj.earliest_start_date"
-                         [bsConfig]="{ dateInputFormat: 'DD-MM-YY' }" container="body" id="sDate">
+                         [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" container="body" id="sDate">
                   <span class="error-msg" @fadeDown *ngIf="!sd?.valid && (sd.touched || f.submitted)">Please select date</span>
                 </div>
                 <div class="col-6">
                   <label class="text-muted mb-0 text-uppercase text-sm" for="eDate">End date</label><span class="text-danger">*</span>
                   <input required bsDatepicker #eDate="bsDatepicker" type="text" class="form-control" name="eDate"  #ed="ngModel" [(ngModel)]="updateObj.latest_end_date"
-                         [bsConfig]="{ dateInputFormat: 'DD-MM-YY' }" container="body" id="eDate">
+                         [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" container="body" id="eDate">
                   <span class="error-msg" @fadeDown *ngIf="!ed?.valid && (ed.touched || f.submitted)">Please select date</span>
                 </div>
               </div>

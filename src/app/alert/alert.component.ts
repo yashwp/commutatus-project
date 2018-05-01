@@ -4,7 +4,6 @@ import {slideIn} from '../shared/animations/slide';
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.scss'],
   animations: [slideIn]
 })
 export class AlertComponent implements OnInit {

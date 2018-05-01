@@ -11,7 +11,6 @@ import {ISubscription} from 'rxjs/Subscription';
 @Component({
   selector: 'app-edit-modal',
   templateUrl: './edit-modal.component.html',
-  styleUrls: ['./edit-modal.component.scss'],
   animations: [fadeDown]
 })
 export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
@@ -55,9 +54,9 @@ export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
     if (this.data) {
       this.updateObj.title = this.data.title;
       this.updateObj.description = this.data.description;
-      this.updateObj.earliest_start_date = moment(this.data.earliest_start_date).format('DD-MM-YY');
-      this.updateObj.latest_end_date = moment(this.data.latest_end_date).format('DD-MM-YY');
-      this.updateObj.applications_close_date = moment(this.data.applications_close_date).format();
+      this.updateObj.earliest_start_date = moment(this.data.earliest_start_date).format('DD-MM-YYYY');
+      this.updateObj.latest_end_date = moment(this.data.latest_end_date).format('DD-MM-YYYY');
+      this.updateObj.applications_close_date = moment(this.data.applications_close_date).format('DD-MM-YYYY');
       this.updateObj.backgrounds = this.data.backgrounds;
       this.updateObj.skills = this.data.skills;
       this.updateObj.role_info.city = this.data.role_info.city;
@@ -123,11 +122,10 @@ export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
 
   update(isValid: boolean) {
     this.updateProps();
-    console.log(this.updateObj.earliest_start_date, isValid, this.updateObj.latest_end_date);
     if (isValid && (this.difference > 30 && this.difference < 90)) {
       this.subscriptions.update = this._commonService.updateOpportunity(this.data.id, this.updateObj).subscribe((res: any) => {
         if (res) {
-          this.onResponse.emit({isSuccess: true, msg: 'Update successfully'});
+          this.onResponse.emit({isSuccess: true, msg: 'Update successfully',  opportunity: res});
           this.hideModal();
         }
       }, (err) => this.onResponse.emit({isSuccess: false, msg: {...err.error}}));

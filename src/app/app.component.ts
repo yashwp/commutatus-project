@@ -1,11 +1,11 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {CommonService} from './shared/services/common.service';
 import {ISubscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class AppComponent implements OnInit, OnDestroy {
@@ -17,11 +17,22 @@ export class AppComponent implements OnInit, OnDestroy {
   isAlertShown = false;
   alertObj = {
     msg: '',
-    isSuccess: false
+    isSuccess: false,
+    opportunity: {}
   };
   private subscriptions: { [name: string]: ISubscription } = {};
 
-  constructor(private _commonService: CommonService) {
+  constructor(private _commonService: CommonService,
+              private _cdr: ChangeDetectorRef) {
+  }
+
+  markForCheck() {
+    setTimeout(() => {
+      if (!this._cdr['destroyed']) {
+        this._cdr.markForCheck();
+        this._cdr.detectChanges();
+      }
+    });
   }
 
   ngOnInit() {
@@ -29,17 +40,22 @@ export class AppComponent implements OnInit, OnDestroy {
       if (res) {
         this.opportunity = res;
         this.title = res.title;
+        this.markForCheck();
       }
     });
+    this.markForCheck();
   }
 
   showAlert(e: any) {
     this.isAlertShown = true;
+    this.opportunity = e.opportunity;
     this.alertObj.isSuccess = e.isSuccess;
     this.alertObj.msg = e.isSuccess ? e.msg : e.msg.error;
     setTimeout(() => {
       this.isAlertShown = false;
+      this.markForCheck();
     }, 3000);
+    this.markForCheck();
   }
 
   ngOnDestroy() {
