@@ -1,0 +1,15 @@
+.response-alert {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 350px;
+  color: white;
+  padding: 7px 25px;
+  z-index: 9999;
+  font-size: 13px;
+  text-align: center;
+  border-radius: 2px;
+  text-transform: capitalize;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16); }
+
+/*# sourceMappingURL=alert.component.css.map */

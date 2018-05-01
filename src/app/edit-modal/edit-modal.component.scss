@@ -5,6 +5,14 @@ ng-select.ng-invalid + .error-msg {
   display: block;
 }
 
+.modal {
+  z-index: 999;
+  .modal-content {
+    box-shadow: $box-shadow;
+    border: 0;
+  }
+}
+
 .error-msg {
   position: absolute;
   margin: 0;

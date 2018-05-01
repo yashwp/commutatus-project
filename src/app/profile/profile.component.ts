@@ -20,12 +20,16 @@ export class ProfileComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes) {
-      console.log('change', changes);
+      // console.log('change', changes);
     }
   }
 
   getFormatedDate(date: any) {
     return moment(date).format('Do MMM Y');
+  }
+
+  convertToString(arr: any[]) {
+    return arr.map((i) => i.name).join(', ');
   }
 
 }

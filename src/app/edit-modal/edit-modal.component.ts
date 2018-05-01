@@ -3,10 +3,9 @@ import {ModalDirective} from 'ngx-bootstrap';
 import {CommonService} from '../shared/services/common.service';
 import * as moment from 'moment';
 import {fadeDown} from '../shared/animations/fade';
-import {NgForm} from '@angular/forms';
 import {GooglePlaceDirective} from 'ngx-google-places-autocomplete';
 import {Address} from 'ngx-google-places-autocomplete/objects/address';
-import {ISubscription} from "rxjs/Subscription";
+import {ISubscription} from 'rxjs/Subscription';
 
 
 @Component({
@@ -22,21 +21,17 @@ export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   data: any;
   @Input()
-  isModalShown = true;
+  isModalShown = false;
   @Output()
   onClose: EventEmitter<any> = new EventEmitter<any>();
+  @Output()
+  onResponse: EventEmitter<any> = new EventEmitter<any>();
 
-  options = {
-    componentRestrictions: { country: 'IN' }
-  };
-  today =  moment().format('L');
-  fromDate = moment().format('DD/MM/YY');
-  toDate = moment().format('DD/MM/YY');
+  today =  moment().format();
   allBackgrounds = [];
   allSkills = [];
-  minDate: any;
-  maxDate: any;
   updateObj: any = {};
+  difference = 0;
   private subscriptions: { [name: string]: ISubscription } = {};
 
   constructor(private _commonService: CommonService) { }
@@ -57,14 +52,12 @@ export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
 
   initialize() {
     this.updateObj = this.getUpdateObj();
-    this.minDate = moment(this.today).add(30, 'day');
-    this.maxDate = moment(this.today).add(90, 'day');
     if (this.data) {
       this.updateObj.title = this.data.title;
       this.updateObj.description = this.data.description;
-      this.updateObj.earliest_start_date = moment(this.data.earliest_start_date).format('DD/MM/YY');
-      this.updateObj.latest_end_date = moment(this.data.latest_end_date).format('DD/MM/YY');
-      this.updateObj.applications_close_date = moment(this.data.applications_close_date).format('DD/MM/YY');
+      this.updateObj.earliest_start_date = moment(this.data.earliest_start_date).format('DD-MM-YY');
+      this.updateObj.latest_end_date = moment(this.data.latest_end_date).format('DD-MM-YY');
+      this.updateObj.applications_close_date = moment(this.data.applications_close_date).format();
       this.updateObj.backgrounds = this.data.backgrounds;
       this.updateObj.skills = this.data.skills;
       this.updateObj.role_info.city = this.data.role_info.city;
@@ -81,14 +74,6 @@ export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
 
   onCityChange(address: Address) {
     this.updateObj.role_info.city = address.formatted_address;
-  }
-
-  addOptionProperty(arr: any[]) {
-    return arr.map((i: any) => {
-      if (!i.hasOwnProperty('option')) {
-        return Object.assign({option: 'preferred'}, i);
-      }
-    });
   }
 
   getUpdateObj() {
@@ -122,19 +107,30 @@ export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
     };
   }
 
-  update(isValid: boolean, form: NgForm) {
+  updateProps() {
     for (const key of Object.keys(this.updateObj)) {
       if (key === 'backgrounds' || key === 'skills') {
-        this.updateObj[key] = this.addOptionProperty(this.updateObj[key]);
+        this.updateObj[key] = this.updateObj[key].map((i: any) =>
+            !i.hasOwnProperty('option') ? Object.assign({option: 'preferred', level: 0}, i) : i);
       }
     }
-    console.log(' plese chal ja', this.updateObj);
-    if (isValid) {
+  }
+
+  onValueChange($event) {
+    const a = moment($event).format();
+    this.difference = moment(a).diff(this.today, 'days');
+  }
+
+  update(isValid: boolean) {
+    this.updateProps();
+    console.log(this.updateObj.earliest_start_date, isValid, this.updateObj.latest_end_date);
+    if (isValid && (this.difference > 30 && this.difference < 90)) {
       this.subscriptions.update = this._commonService.updateOpportunity(this.data.id, this.updateObj).subscribe((res: any) => {
         if (res) {
-          console.log('after response');
+          this.onResponse.emit({isSuccess: true, msg: 'Update successfully'});
+          this.hideModal();
         }
-      });
+      }, (err) => this.onResponse.emit({isSuccess: false, msg: {...err.error}}));
     }
   }
 

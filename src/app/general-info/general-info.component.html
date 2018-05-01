@@ -1,3 +1,148 @@
-<p>
-  general-info works!
-</p>
+<div *ngIf="opportunity" class="app-tabs-component">
+  <tabset type="pills" [justified]="true">
+    <tab class="bg-white tab-item tab-overview" heading="Overview">
+      <div class="tab-item-box mt-4 p-3 p-sm-5">
+        <div class="tab-item-content">
+          <div class="mb-3">
+            <h5 class="text-capitalize mb-1">Organization</h5>
+            <hr class="hr-line">
+          </div>
+          <p class="text-muted my-4">{{opportunity.branch?.organisation.name}}</p>
+        </div>
+        <div class="tab-item-content mt-3">
+          <div class="mb-3">
+            <h5 class="text-capitalize mb-1">Role description</h5>
+            <hr class="hr-line">
+          </div>
+          <p class="text-muted my-4">{{opportunity.description}}</p>
+        </div>
+        <!--<div class="tab-item-content mt-3">-->
+        <!--<div class="mb-3">-->
+        <!--<h5 class="text-capitalize mb-1">Main activities</h5>-->
+        <!--<hr class="hr-line">-->
+        <!--</div>-->
+        <!--<p class="text-muted my-4">{{opportunity.branch.organisation.name}}</p>-->
+        <!--</div>-->
+      </div>
+    </tab>
+    <tab class="bg-white tab-item tab-prerequisites" heading="Prerequisites">
+      <div class="tab-item-box my-4 p-3 p-sm-5">
+        <div class="tab-item-content">
+          <div class="mb-3">
+            <h5 class="text-capitalize mb-1">Backgrounds</h5>
+            <hr class="hr-line">
+          </div>
+          <div class="row">
+            <div class="col-sm-6 d-flex flex-column">
+              <span class="text-sm text-muted text-uppercase">Preferred</span>
+              <div class="d-flex">
+                <span>{{convertToString(backgrounds.preferred)}}</span>
+              </div>
+            </div>
+            <div *ngIf="backgrounds.required.length" class="col-sm-6 d-flex flex-column">
+              <span class="text-sm text-muted text-uppercase">Required</span>
+              <div class="d-flex">
+                <span>{{convertToString(backgrounds.required)}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-item-content mt-3">
+          <div class="mb-3">
+            <h5 class="text-capitalize mb-1">Skills</h5>
+            <hr class="hr-line">
+          </div>
+          <div class="row">
+            <div *ngIf="skills.preferred.length" class="col-sm-6 d-flex flex-column">
+              <span class="text-sm text-muted text-uppercase">Preferred</span>
+              <div class="d-flex">
+                <span>{{convertToString(skills.preferred)}}</span>
+              </div>
+            </div>
+            <div *ngIf="skills.required.length" class="col-sm-6 d-flex flex-column">
+              <span class="text-sm text-muted text-uppercase">Required</span>
+              <div class="d-flex">
+                <span>{{convertToString(skills.required)}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-item-content mt-3">
+          <div class="mb-3">
+            <h5 class="text-capitalize mb-1">Languages</h5>
+            <hr class="hr-line">
+          </div>
+          <div class="row">
+            <div *ngIf="languages.preferred.length" class="col-sm-6 d-flex flex-column">
+              <span class="text-sm text-muted text-uppercase">Preferred</span>
+              <div class="d-flex">
+                <span>{{convertToString(languages.preferred)}}</span>
+              </div>
+            </div>
+            <div *ngIf="languages.required.length" class="col-sm-6 d-flex flex-column">
+              <span class="text-sm text-muted text-uppercase">Required</span>
+              <div class="d-flex">
+                <span>{{convertToString(languages.required)}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-item-content mt-3">
+          <div class="mb-3">
+            <h5 class="text-capitalize mb-1">Nationalities</h5>
+            <hr class="hr-line">
+          </div>
+          <div class="row">
+            <div class="col-sm-6 d-flex flex-column" *ngIf="nationalities.preferred.length">
+              <span class="text-sm text-muted text-uppercase">Preferred</span>
+              <div class="d-flex">
+                <span>{{convertToString(nationalities.preferred)}}</span>
+              </div>
+            </div>
+            <div class="col-sm-6 d-flex flex-column" *ngIf="nationalities.required.length">
+              <span class="text-sm text-muted text-uppercase">Required</span>
+              <div class="d-flex">
+                <span>{{convertToString(nationalities.required)}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="opportunity.study_levels.length" class="tab-item-content mt-3">
+          <div class="mb-3">
+            <h5 class="text-capitalize mb-1">Study Levels</h5>
+            <hr class="hr-line">
+          </div>
+          <div class="row">
+            <div class="col-sm-6 d-flex flex-column">
+              <span>{{opportunity.study_levels[0]?.name}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </tab>
+    <tab class="bg-white tab-item tab-vnl" heading="Visa and Logistics">
+      <div class="tab-item-box my-4 p-3 p-sm-5">
+        <div class="tab-item-content">
+          <div class="row">
+            <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+              <span class="grad-text lnr lnr-star-half fo-55"></span>
+              <h5 class="my-3 text-muted">No Information Avaiable</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </tab>
+    <tab class="bg-white tab-item tab-testimonial" heading="Testimonials">
+      <div class="tab-item-box my-4 p-3 p-sm-5">
+        <div class="tab-item-content">
+          <div class="row">
+            <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+              <span class="grad-text lnr lnr-bubble fo-55"></span>
+              <h5 class="my-3 text-muted">No Testimonals Avaiable</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </tab>
+  </tabset>
+</div>

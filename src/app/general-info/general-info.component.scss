@@ -1,0 +1,13 @@
+@import "../app.component";
+
+.app-tabs-component {
+  .tab-item {
+    .tab-item-box {
+      min-height: 200px;
+      box-shadow: $box-shadow;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+    }
+  }
+}

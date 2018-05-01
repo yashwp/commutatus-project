@@ -15,20 +15,19 @@ import {ProfileComponent} from './profile/profile.component';
 import {GeneralInfoComponent} from './general-info/general-info.component';
 import {DirectivesModule} from './shared/directives/directives.module';
 import {EditModalComponent} from './edit-modal/edit-modal.component';
-import {PipeModule} from './shared/pipe/pipe.module';
 import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
-
+import {AlertComponent} from './alert/alert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
     GeneralInfoComponent,
-    EditModalComponent
+    EditModalComponent,
+    AlertComponent
   ],
   imports: [
     DirectivesModule,
-    PipeModule,
     HttpClientModule,
     GooglePlaceModule,
     BsDatepickerModule.forRoot(),

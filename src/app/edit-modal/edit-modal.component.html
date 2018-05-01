@@ -1,4 +1,4 @@
-<div *ngIf="isModalShown" [config]="{ show: true }" (onHidden)="onHidden()" bsModal #autoShownModal="bs-modal"
+<div *ngIf="isModalShown" [config]="{ show: true, backdrop: false }" (onHidden)="onHidden()" bsModal #autoShownModal="bs-modal"
      class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
   <div class="modal-dialog">
     <div class="modal-content p-4">
@@ -12,7 +12,7 @@
         </button>
       </div>
       <div *ngIf="data" class="modal-body">
-        <form #f="ngForm" class="pt-4" (submit)="update(f.valid, f)">
+        <form #f="ngForm" class="pt-4" (submit)="update(f.valid)">
           <div class="row">
             <div class="col-12 mb-3">
               <label class="text-muted mb-0 text-uppercase text-sm" for="title">Title</label><span class="text-danger">*</span>
@@ -30,31 +30,35 @@
               <div class="row">
                 <div class="col-6">
                   <label class="text-muted mb-0 text-uppercase text-sm" for="sDate">Start date</label><span class="text-danger">*</span>
-                  <input required bsDatepicker #sDate="bsDatepicker" type="text" class="form-control" name="sDate" [(ngModel)]="updateObj.earliest_start_date"
-                         id="sDate">
+                  <input required bsDatepicker #sDate="bsDatepicker" type="text" class="form-control" name="sDate"  #sd="ngModel" [(ngModel)]="updateObj.earliest_start_date"
+                         [bsConfig]="{ dateInputFormat: 'DD-MM-YY' }" container="body" id="sDate">
+                  <span class="error-msg" @fadeDown *ngIf="!sd?.valid && (sd.touched || f.submitted)">Please select date</span>
                 </div>
                 <div class="col-6">
                   <label class="text-muted mb-0 text-uppercase text-sm" for="eDate">End date</label><span class="text-danger">*</span>
-                  <input required bsDatepicker #eDate="bsDatepicker" type="text" class="form-control" name="eDate" [(ngModel)]="updateObj.latest_end_date"
-                         id="eDate">
+                  <input required bsDatepicker #eDate="bsDatepicker" type="text" class="form-control" name="eDate"  #ed="ngModel" [(ngModel)]="updateObj.latest_end_date"
+                         [bsConfig]="{ dateInputFormat: 'DD-MM-YY' }" container="body" id="eDate">
+                  <span class="error-msg" @fadeDown *ngIf="!ed?.valid && (ed.touched || f.submitted)">Please select date</span>
                 </div>
               </div>
             </div>
             <div class="col-12 mb-3">
               <label class="text-muted text-uppercase text-sm mb-0" for="cDate">Application close date</label><span class="text-danger">*</span>
-              <input required bsDatepicker #cDate="bsDatepicker" type="text" class="form-control" name="cDate"
-                     [(ngModel)]="updateObj.applications_close_date" id="cDate" container="body" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY'}">
+              <input required bsDatepicker #cDate="bsDatepicker" type="text" class="form-control" name="cDate" #cd="ngModel"
+                     [(ngModel)]="updateObj.applications_close_date" (bsValueChange)="onValueChange($event)" id="cDate" container="body" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY'}">
+              <span class="error-msg" @fadeDown *ngIf="!cd?.valid && (cd.touched || f.submitted)">Please select date</span>
             </div>
             <div class="col-12 mb-3">
               <label class="text-muted text-uppercase text-sm mb-0" for="bg">Backgrounds</label><span class="text-danger">*</span>
-              <ng-select name="backgrounds" id="bg" [items]="allBackgrounds" bindLabel="name" closeOnSelect="false" hideSelected="true" [multiple]="true" [maxSelectedItems]="3" appendTo="body"
-                         [(ngModel)]="updateObj.backgrounds">
-              </ng-select>
+              <ng-select name="backgrounds" #bg="ngModel" id="bg" [items]="allBackgrounds" bindLabel="name" closeOnSelect="false" hideSelected="true" [multiple]="true" [maxSelectedItems]="3"
+                         appendTo="body" [(ngModel)]="updateObj.backgrounds" required></ng-select>
+              <span class="error-msg" @fadeDown *ngIf="!bg?.valid && (bg.touched|| f.submitted)">Please select background(s)</span>
             </div>
             <div class="col-12 mb-3">
               <label class="text-muted text-uppercase text-sm mb-0" for="skills">Skills</label><span class="text-danger">*</span>
-              <ng-select name="skills" id="skills" [items]="allSkills" bindLabel="name" closeOnSelect="false" hideSelected="true" [multiple]="true" appendTo="body"
-                         [(ngModel)]="data.skills"></ng-select>
+              <ng-select name="skills" #skill="ngModel" id="skills" [items]="allSkills" bindLabel="name" closeOnSelect="false" hideSelected="true" [multiple]="true"
+                         appendTo="body" [(ngModel)]="updateObj.skills" required></ng-select>
+              <span class="error-msg" @fadeDown *ngIf="!skill?.valid && (skill.touched|| f.submitted)">Please select skill(s)</span>
             </div>
             <div class="col-12 mb-3">
               <div class="row">
@@ -74,11 +78,11 @@
             </div>
             <div class="col-12 mb-3">
               <label class="text-muted text-uppercase text-sm mb-0" for="city">City</label><span class="text-danger">*</span>
-              <input ngx-google-places-autocomplete #placesRef="ngx-places" [options]="options" (onAddressChange)="onCityChange($event)" required name="city" id="city" class="form-control" [(ngModel)]="updateObj.role_info.city">
-              <span class="error-msg" @fadeDown *ngIf="!placesRef?.valid && (placesRef?.errors|| f.submitted)">Please select city</span>
+              <input ngx-google-places-autocomplete #placesRef="ngx-places" (onAddressChange)="onCityChange($event)" required name="city" id="city" class="form-control" [(ngModel)]="updateObj.role_info.city">
+              <span class="error-msg" @fadeDown *ngIf="!placesRef?.valid && (placesRef?.errors || f.submitted)">Please select city</span>
             </div>
             <div class="col-12 text-center">
-              <button class="btn btn-primary-grad mt-3 text-white border-0">Update</button>
+              <button class="btn btn-secondary-grad mt-3 text-white border-0" [disabled]="!f.valid">Update</button>
             </div>
           </div>
         </form>

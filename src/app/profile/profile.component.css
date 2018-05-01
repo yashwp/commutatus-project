@@ -26,7 +26,7 @@ h1, h2, h3, h4, h5, h6 {
 .cursor-disabled {
   cursor: not-allowed; }
 
-.bg-grad-secondary, .btn-primary-grad {
+.bg-grad-secondary, .btn-secondary-grad {
   background: linear-gradient(90deg, #0c55fb, #1290fc); }
 
 h5 {
@@ -36,7 +36,7 @@ h5 {
 .z-index-10 {
   z-index: 10; }
 
-.btn-primary-grad {
+.btn-secondary-grad {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16);
   width: 200px;
   padding: 10px 25px;
@@ -67,8 +67,6 @@ hr.hr-line {
       mix-blend-mode: color-dodge; }
     .app-container .app-hero-component .opportunity-location {
       font-size: 26px; }
-    .app-container .app-hero-component .pac-container {
-      z-index: 9999 !important; }
     .app-container .app-hero-component:before {
       content: '';
       position: absolute;
@@ -79,12 +77,6 @@ hr.hr-line {
       width: 100%;
       height: 100%;
       opacity: 0.3; }
-  .app-container .app-tabs-component .tab-item .tab-item-box {
-    min-height: 200px;
-    box-shadow: 0 24px 80px -12px rgba(0, 0, 0, 0.1);
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px; }
   .app-container .fab {
     position: fixed;
     right: 25px;
