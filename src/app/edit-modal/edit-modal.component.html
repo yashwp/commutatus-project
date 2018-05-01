@@ -1,5 +1,5 @@
 <div *ngIf="isModalShown" [config]="{ show: true, backdrop: false }" (onHidden)="onHidden()" bsModal #autoShownModal="bs-modal"
-     class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
+     class="modal fade app-edit-component" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
   <div class="modal-dialog">
     <div class="modal-content p-4">
       <div class="d-flex align-items-center justify-content-between">
@@ -82,7 +82,7 @@
               <span class="error-msg" @fadeDown *ngIf="!placesRef?.valid && (placesRef?.errors || f.submitted)">Please select city</span>
             </div>
             <div class="col-12 text-center">
-              <button class="btn btn-secondary-grad mt-3 text-white border-0" [disabled]="!f.valid">Update</button>
+              <button class="btn btn-secondary btn-secondary-grad mt-3 text-white border-0">Update</button>
             </div>
           </div>
         </form>

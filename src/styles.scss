@@ -8,8 +8,8 @@
 
 // Variables
 $primary-grad: linear-gradient(to right, #000046, #1cb5e0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-$secondary-grad: linear-gradient(90deg,#0c55fb,#1290fc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-$box-shadow: 0 24px 80px -12px rgba(0,0,0,.1);
+$secondary-grad: linear-gradient(90deg, #0c55fb, #1290fc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+$box-shadow: 0 24px 80px -12px rgba(0, 0, 0, .1);
 
 // Common SCSS
 * {
@@ -59,16 +59,19 @@ h5 {
 
 .btn-secondary-grad {
   @extend .bg-grad-secondary;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.16);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16);
   width: 200px;
   padding: 10px 25px;
   border-radius: 2px;
   z-index: 10;
+  &:focus {
+    box-shadow: none;
+  }
 }
 
 .grad-text {
   background-image: $primary-grad;
-  color:transparent;
+  color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
 }
@@ -94,7 +97,31 @@ hr.hr-line {
   text-align: center;
   border-radius: 2px;
   text-transform: capitalize;
-  box-shadow: 0 5px 10px rgba(0,0,0,.16);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .16);
+}
+
+@keyframes tabFade {
+  from {
+    opacity: 0;
+    transform: translateY(4px)
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+// Date Picker SCSS
+.theme-green {
+  .bs-datepicker-head {
+    background: $secondary-grad;
+  }
+  .bs-datepicker-body table td span.selected,
+  .bs-datepicker-body table td.selected span,
+  .bs-datepicker-body table td span[class*="select-"]:after,
+  .bs-datepicker-body table td[class*="select-"] span:after {
+    background: $secondary-grad;
+  }
 }
 
 // Individual Components SCSS
@@ -142,10 +169,10 @@ hr.hr-line {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.25);
-    transition: all 0.2s cubic-bezier(.8,1,.56,0);
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.25);
+    transition: all 0.2s cubic-bezier(.8, 1, .56, 0);
     &:hover {
-      box-shadow: 0 6px 14px 0 rgba(0,0,0,0.15);
+      box-shadow: 0 6px 14px 0 rgba(0, 0, 0, 0.15);
       transform: scale(1.05);
     }
     &:visited {
@@ -154,47 +181,58 @@ hr.hr-line {
   }
 
   // Edit Modal SCSS
-  input.ng-invalid + .error-msg,
-  ng-select.ng-invalid + .error-msg {
-    display: block;
-  }
-
-  .modal {
+  .app-edit-component.modal {
     z-index: 999;
+
     .modal-content {
       box-shadow: $box-shadow;
       border: 0;
-    }
-  }
 
-  .error-msg {
-    position: absolute;
-    margin: 0;
-    right: 12px;
-    font-size: 0.718rem;
-    color: #e53935;
-    cursor: pointer;
-    max-width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    padding: 0 4px;
-    border-top: none;
-    -webkit-border-radius: 0 0 2px 2px;
-    border-radius: 0 0 2px 2px;
-    -webkit-transition: 0.2s ease-in;
-    -o-transition: 0.2s ease-in;
-    transition: 0.2s ease-in;
-    font-weight: 300;
-    bottom: -25px;
-    height: 25px;
-    display: none;
+      input {
+        &:focus {
+          -webkit-box-shadow: none;
+          -moz-box-shadow: none;
+          box-shadow: none;
+        }
+      }
+      input.ng-invalid + .error-msg,
+      ng-select.ng-invalid + .error-msg {
+        display: block;
+      }
+      .error-msg {
+        position: absolute;
+        margin: 0;
+        right: 12px;
+        font-size: 0.718rem;
+        color: #e53935;
+        cursor: pointer;
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        padding: 0 4px;
+        border-top: none;
+        -webkit-border-radius: 0 0 2px 2px;
+        border-radius: 0 0 2px 2px;
+        -webkit-transition: 0.2s ease-in;
+        -o-transition: 0.2s ease-in;
+        transition: 0.2s ease-in;
+        font-weight: 300;
+        bottom: -25px;
+        height: 25px;
+        display: none;
+      }
+    }
   }
 
   // General(tab) Component SCSS
   .app-tabs-component {
+    .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+      background: $secondary-grad;
+    }
     .tab-item {
+      animation: tabFade 0.3s ease-in;
       .tab-item-box {
         min-height: 200px;
         box-shadow: $box-shadow;
@@ -214,5 +252,4 @@ hr.hr-line {
       border-radius: 4px;
     }
   }
-
 }
