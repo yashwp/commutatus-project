@@ -67,8 +67,14 @@ h5 {
   &:focus {
     box-shadow: none;
   }
+  &.btn-sm {
+    width: unset;
+    padding: 5px 15px;
+  }
 }
-
+.text-decoration-n {
+  text-decoration: none !important;
+}
 .grad-text {
   background-image: $primary-grad;
   color: transparent;
@@ -128,6 +134,11 @@ hr.hr-line {
 .app-container {
   background-color: rgba(26, 41, 128, 0.03);
 
+  nav {
+    img.company-logo {
+      height: 30px;
+    }
+  }
   // app-component scss
   .app-hero-component {
     .opportunity-title, .opportunity-location {

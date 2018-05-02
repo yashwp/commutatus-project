@@ -3,8 +3,19 @@
 		<div *ngIf="opportunity" class="row h-100">
       <div class="col-12 px-0">
         <div class="app-hero-component d-flex align-items-center justify-content-center flex-column" [style.background-image]="'url(' + opportunity.cover_photo_urls + ')'">
-          <nav class="navbar fixed-top bg-transparent border-0">
-            <a class="navbar-brand" href="#">Default</a>
+          <nav class="navbar navbar-expand-lg fixed-top bg-transparent border-0">
+            <a class="navbar-brand" href="http://aiesec-website-staging.eu-west-1.elasticbeanstalk.com/">
+              <img class="img-fluid company-logo" src="../assets/img/logo.svg" alt="Logo">
+            </a>
+            <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">-->
+              <!--<span class="navbar-toggler-icon"></span>-->
+            <!--</button>-->
+            <!--<div class="collapse navbar-collapse d-flex justify-content-end" id="navbarText">-->
+              <!--<a href="https://partners.aiesec.org/" class="text-white text-decoration-n">For Organization</a>-->
+              <!--<a href="http://help.aiesec.org/" class="text-white pl-3 text-decoration-n">Help</a>-->
+              <!--<a href="http://54.76.47.194/users/sign_in?country=India" class="text-white px-3 text-decoration-n">Sign Up</a>-->
+              <!--<a href="http://aiesec-website-staging.eu-west-1.elasticbeanstalk.com/search" class="text-white btn btn-sm btn-secondary-grad text-decoration-n">Explore</a>-->
+            <!--</div>-->
           </nav>
           <h2 class="text-white opportunity-title text-center">{{title}}</h2>
           <p class="text-white z-index-10 opportunity-location my-2">
