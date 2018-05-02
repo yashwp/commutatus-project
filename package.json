@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "node server.js",
+    "start": "ng serve",
     "hmr": "ng serve --hmr -e=hmr",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
