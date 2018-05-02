@@ -36,11 +36,13 @@ export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
   constructor(private _commonService: CommonService) { }
 
   ngOnInit() {
+    // Fetching list of all the backgrounds from service
     this.subscriptions.bg = this._commonService.getBackgrounds().subscribe((bg: any) => {
       if (bg) {
         this.allBackgrounds = [...bg];
       }
     });
+    // Fetching list of all the skills from service
     this.subscriptions.skill = this._commonService.getSkills().subscribe((skills: any) => {
       if (skills) {
         this.allSkills = [...skills];
@@ -49,6 +51,7 @@ export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
     this.initialize();
   }
 
+  // Initializing the update Object
   initialize() {
     this.updateObj = this.getUpdateObj();
     if (this.data) {
@@ -65,16 +68,19 @@ export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  // Initializing the update Object on any changes
   ngOnChanges(changes: SimpleChanges) {
     if (changes.data || changes.isModalShown) {
       this.initialize();
     }
   }
 
+  // Updating the city on selection from the dropdown
   onCityChange(address: Address) {
     this.updateObj.role_info.city = address.formatted_address;
   }
 
+  // Returns new Object of for update model
   getUpdateObj() {
     return {
       title: '',
@@ -106,6 +112,7 @@ export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
     };
   }
 
+  // Inserting option and level property into the update Object
   updateProps() {
     for (const key of Object.keys(this.updateObj)) {
       if (key === 'backgrounds' || key === 'skills') {
@@ -115,11 +122,13 @@ export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  // Finding the difference between today's date and application close date
   onValueChange($event) {
     const a = moment($event).format();
     this.difference = moment(a).diff(this.today, 'days');
   }
 
+  // Updates the opportunity
   update(isValid: boolean) {
     this.updateProps();
     if (isValid && (this.difference > 30 && this.difference < 90)) {
@@ -132,6 +141,7 @@ export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  // Closing bsModal
   hideModal(): void {
     this.autoShownModal.hide();
   }
@@ -141,6 +151,7 @@ export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
     this.onClose.emit(true);
   }
 
+  // Unsubscribe all the subscriptions
   ngOnDestroy() {
     if (this.subscriptions) {
       for (const [key, value] of Object.entries(this.subscriptions)) {

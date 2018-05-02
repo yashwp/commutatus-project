@@ -16,11 +16,13 @@ export class LimitToDirective implements OnInit, OnDestroy {
   ngOnInit() {
     const ctrl = this.ngControl.control;
 
+    // Restricting user input after the limit is reached
     this.subscriptions.limit = ctrl.valueChanges
       .pipe(map(v => (v || '').toString().slice(0, this.limit)))
       .subscribe(v => ctrl.setValue(v, {emitEvent: false}));
   }
 
+  // Unsubscribe all the subscriptions
   ngOnDestroy() {
     if (this.subscriptions) {
       for (const [key, value] of Object.entries(this.subscriptions)) {

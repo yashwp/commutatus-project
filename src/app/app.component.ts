@@ -36,8 +36,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscriptions.opportunity = this._commonService.getOportutnityById(6124).subscribe((res: any) => {
+  // fetching opportunity of id 6124
+    this.subscriptions.opportunity = this._commonService.getOpportunityById(6124).subscribe((res: any) => {
       if (res) {
+        // On success response filling data
         this.opportunity = res;
         this.title = res.title;
         this.markForCheck();
@@ -46,6 +48,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.markForCheck();
   }
 
+  // Popping up alert on Patch request success or failure
   showAlert(e: any) {
     this.isAlertShown = true;
     this.opportunity = e.opportunity;
@@ -54,10 +57,11 @@ export class AppComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.isAlertShown = false;
       this.markForCheck();
-    }, 3000);
+    }, 3500);
     this.markForCheck();
   }
 
+  // Unsubscribe all the subscriptions
   ngOnDestroy() {
     if (this.subscriptions) {
       for (const [key, value] of Object.entries(this.subscriptions)) {

@@ -39,10 +39,12 @@ export class OpportunityGeneralComponent implements OnInit, OnChanges {
     }
   }
 
+  // Joining the elements of array using ', '
   convertToString(arr: any[]) {
     return arr.map((i) => i.name).join(', ');
   }
 
+  // Filtering based on option property value
   filterByProperty() {
     const isPreferred = ({ option }: any) => option === 'preferred';
     const isRequired = ({ option }: any) => option === 'required';

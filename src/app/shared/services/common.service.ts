@@ -9,18 +9,22 @@ export class CommonService {
 
   constructor(private http: HttpClient) { }
 
-  getOportutnityById(id: number) {
+  // Service using GET method to fetching opportunity data
+  getOpportunityById(id: number) {
     return this.http.get(this.apiPath + `/opportunities/${id}?${this.accessToken}`);
   }
 
+  // Service using GET method to fetching all the skills
   getSkills() {
     return this.http.get(this.apiPath + `/lists/skills/?${this.accessToken}`);
   }
 
+  // Service using GET method to fetching all the backgrounds
   getBackgrounds() {
     return this.http.get(this.apiPath + `/lists/backgrounds/?${this.accessToken}`);
   }
 
+  // Service using PATCH method to update opportunity
   updateOpportunity(id: number, obj: any) {
     return this.http.patch(this.apiPath + `/opportunities/${id}?${this.accessToken}`, {opportunity: obj});
   }
