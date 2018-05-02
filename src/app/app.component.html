@@ -3,6 +3,9 @@
 		<div *ngIf="opportunity" class="row h-100">
       <div class="col-12 px-0">
         <div class="app-hero-component d-flex align-items-center justify-content-center flex-column" [style.background-image]="'url(' + opportunity.cover_photo_urls + ')'">
+          <nav class="navbar fixed-top bg-transparent border-0">
+            <a class="navbar-brand" href="#">Default</a>
+          </nav>
           <h2 class="text-white opportunity-title text-center">{{title}}</h2>
           <p class="text-white z-index-10 opportunity-location my-2">
             <span class="lnr lnr-map-marker"></span> {{opportunity.location}}
