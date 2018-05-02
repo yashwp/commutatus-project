@@ -1,10 +1,10 @@
 import {Component, OnInit, Input, SimpleChanges, OnChanges} from '@angular/core';
 
 @Component({
-  selector: 'app-general-info',
-  templateUrl: './general-info.component.html',
+  selector: 'app-opportunity-general',
+  templateUrl: './opportunity-general.component.html',
 })
-export class GeneralInfoComponent implements OnInit, OnChanges {
+export class OpportunityGeneralComponent implements OnInit, OnChanges {
 
   @Input()
   opportunity: any;

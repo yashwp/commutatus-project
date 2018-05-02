@@ -33,7 +33,7 @@
             <hr class="hr-line">
           </div>
           <div class="row">
-            <div class="col-sm-6 d-flex flex-column">
+            <div *ngIf="backgrounds.preferred.length" class="col-sm-6 d-flex flex-column">
               <span class="text-sm text-muted text-uppercase">Preferred</span>
               <div class="d-flex">
                 <span>{{convertToString(backgrounds.preferred)}}</span>

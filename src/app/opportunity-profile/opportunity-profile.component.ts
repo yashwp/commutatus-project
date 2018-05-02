@@ -2,10 +2,10 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
+  selector: 'app-opportunity-profile',
+  templateUrl: './opportunity-profile.component.html',
 })
-export class ProfileComponent implements OnInit, OnChanges {
+export class OpportunityProfileComponent implements OnInit, OnChanges {
 
   @Input()
   opportunity: any;

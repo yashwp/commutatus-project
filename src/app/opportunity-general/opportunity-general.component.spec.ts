@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GeneralInfoComponent } from './general-info.component';
+import { OpportunityGeneralComponent } from './opportunity-general.component';
 
-describe('GeneralInfoComponent', () => {
-  let component: GeneralInfoComponent;
-  let fixture: ComponentFixture<GeneralInfoComponent>;
+describe('OpportunityGeneralComponent', () => {
+  let component: OpportunityGeneralComponent;
+  let fixture: ComponentFixture<OpportunityGeneralComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GeneralInfoComponent ]
+      declarations: [ OpportunityGeneralComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GeneralInfoComponent);
+    fixture = TestBed.createComponent(OpportunityGeneralComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
