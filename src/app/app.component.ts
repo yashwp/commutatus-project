@@ -10,7 +10,6 @@ import {ISubscription} from 'rxjs/Subscription';
 
 export class AppComponent implements OnInit, OnDestroy {
 
-  title = 'Commutatus Project';
   opportunity: any;
   isEnabled = false;
   showModal = false;
@@ -41,7 +40,6 @@ export class AppComponent implements OnInit, OnDestroy {
       if (res) {
         // On success response filling data
         this.opportunity = res;
-        this.title = res.title;
         this.markForCheck();
       }
     });
@@ -51,9 +49,11 @@ export class AppComponent implements OnInit, OnDestroy {
   // Popping up alert on Patch request success or failure
   showAlert(e: any) {
     this.isAlertShown = true;
-    this.opportunity = e.opportunity;
     this.alertObj.isSuccess = e.isSuccess;
     this.alertObj.msg = e.isSuccess ? e.msg : e.msg.error;
+    if (e.isSuccess) {
+      this.opportunity = e.opportunity;
+    }
     setTimeout(() => {
       this.isAlertShown = false;
       this.markForCheck();

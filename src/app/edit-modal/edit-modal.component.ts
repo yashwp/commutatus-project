@@ -130,6 +130,10 @@ export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
 
   // Updates the opportunity
   update(isValid: boolean) {
+    if (!(this.difference > 30 && this.difference < 90)) {
+      this.onResponse.emit({isSuccess: false, msg: {error: 'Application close date should be between 30 to 90 days from today'}});
+      return;
+    }
     this.updateProps();
     if (isValid && (this.difference > 30 && this.difference < 90)) {
       this.subscriptions.update = this._commonService.updateOpportunity(this.data.id, this.updateObj).subscribe((res: any) => {
