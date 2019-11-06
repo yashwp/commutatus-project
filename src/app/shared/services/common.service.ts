@@ -11,7 +11,7 @@ export class CommonService {
 
   // Service using GET method to fetching opportunity data
   getOpportunityById(id: number) {
-    return this.http.get(this.apiPath + `/opportunities/${id}?${this.accessToken}`);
+    return this.http.get(this.apiPath + `/opportunity/${id}?${this.accessToken}`);
   }
 
   // Service using GET method to fetching all the skills
