@@ -5,13 +5,13 @@ import {HttpClient} from '@angular/common/http';
 export class CommonService {
 
   private accessToken = 'access_token=dd0df21c8af5d929dff19f74506c4a8153d7acd34306b9761fd4a57cfa1d483c';
-  private apiPath = 'http://gisapi-web-staging-1636833739.eu-west-1.elb.amazonaws.com/v2';
+  private apiPath = 'https://api-staging.aiesec.org/v2';
 
   constructor(private http: HttpClient) { }
 
   // Service using GET method to fetching opportunity data
   getOpportunityById(id: number) {
-    return this.http.get(this.apiPath + `/opportunity/${id}?${this.accessToken}`);
+    return this.http.get(this.apiPath + `/opportunities/${id}?${this.accessToken}`);
   }
 
   // Service using GET method to fetching all the skills
